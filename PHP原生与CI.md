@@ -34,9 +34,26 @@ database -> table ->列名（类型、大小、主外键）
 删
 改
 查
+  select * from 表名
+  select * from 表名 where 条件(可用逻辑运算符)
+//返回结果集(空结果集/多行、一行)
+//result()返回多行
+//row()返回一行
+
 ```
 
 ci
 ```
 application -> controllers -> 首字母大写.php
+```
+CI配置
+```
+(1).htaccess放到根目录下
+(2)config/autoload.php url/database/session
+   config/config.php--evcryption_key
+(3)config/databaser.php
+```
+```
+user(uid,uname,pass,flag,header)
+blog(bid,title,content,ntime,hits,uid)
 ```

@@ -192,3 +192,21 @@ $vals = array(
 $cap = create_captcha($vals);
 echo $cap['image'];
 ```
+
+分页
+```
+1.总页数
+2.每页显示多少条
+3.每页第一条是数据库第几条索引
+
+$this->load->library('pagination');
+
+$config['base_url'] = 'http://example.com/index.php/test/page/';
+$config['total_rows'] = 200;
+$config['per_page'] = 20;
+$this->pagination->initialize($config);
+
+//分页页面
+echo $this->pagination->create_links();
+
+```

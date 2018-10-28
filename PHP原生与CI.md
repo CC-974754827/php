@@ -78,3 +78,117 @@ post  $this->input->post();
 delete
 input
 ```
+
+view<=>controllers
+```
+发送
+Get: 1.form get
+     2.a标签
+     3.$.get
+     4.curl get
+
+POST:1.form
+     2.$.post
+     3.curl post
+     4.restful user/login/1
+接收
+Get: 1.$_GET 
+     2.$this->input->get()
+     3.$this->uri->segment()
+     
+POST:1.$_POST
+     2.$this->input->post()
+     
+     
+
+$this->load->view('模板',$data);
+$this->load->vars('变量名');
+```
+
+controllers<=>models
+```
+$this->load->model('model名');
+$this->model名->方法();
+
+①
+$sql='sql拼接';
+$query=$this->db->query();
+query builder
+    return $query;
+    return $query->row();
+    return $query->result();
+    
+②
+插入
+$data=array(
+    'account' => $username;
+);
+$query=$this->db->insert('表名',$data);
+return $query;
+
+查询
+$data=array(
+    'account' => $username;
+);
+$query=$this->db->get_where('表名',$data);
+return $query;
+```
+
+相对定位
+```
+<base href="<?php echo site_url();?>">
+```
+
+重点**
+```
+defined('BASEPATH') OR exit('No direct script access allowed');
+class Welcome extends CI_Controller {
+	public function __constructor(){
+		parent::__construct();
+	}
+```
+
+获取session数据
+```
+设置数据
+$newdata = array(
+    'uid'  =>$rs->USER_ID,
+    'name'=>$rs->NAME,
+    'logged_in'=>TRUE
+);
+$this->session->set_userdata($newdata);
+获取数据
+$this->session->userdata('name');
+```
+验证码
+```
+$this->load->helper('captcha');
+    1.随机字母或数字
+    2.将随机字母或数字放到图片上
+    3.图片加噪点
+    4.随机字母或数字session通到ajax验证
+
+$vals = array(
+    'word'      => rand(1000,9999) ,
+    'img_path'  => './captcha/', //存放地址
+    'img_url'   => base_url.'captcha/',
+    //字体'font_path' => './path/to/fonts/texb.ttf',
+    'img_width' => '150',
+    'img_height'    => 30,
+    'expiration'    => 7200,//图片生存时间
+    'word_length'   => 8,
+    'font_size' => 16,
+    'img_id'    => 'Imageid',
+    'pool'      => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+
+    'colors'    => array(
+        'background' => array(255, 255, 255),
+        'border' => array(255, 255, 255),
+        'text' => array(0, 0, 0),
+        'grid' => array(255, 40, 40)
+    )
+);
+
+$cap = create_captcha($vals);
+echo $cap['image'];
+```
